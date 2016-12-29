@@ -4,7 +4,8 @@ import React, { Component } from 'react';
 
 
 //La clase se crea para extender la funcionalidad de Component
-//en el componente.
+//en el componente, por ejemplo si se quiere tener la funcionalidad de state en el
+//componente
 class SearchBar extends Component {
     constructor(props){
         //super() llama al constructor de la superclase.
@@ -22,17 +23,17 @@ class SearchBar extends Component {
         return (
             //En este caso el input modifica al estado y no viceversa.
             <div>
-                <label>Welcome {this.state.name} </label>
+                <input onChange={event => this.onInputChange(event.target.value)} />
                 <br/>
-                <input onChange={this.onInputChange} />
             </div>
             );
     }
     //Event handler
 
-    onInputChange(e) {
+    onInputChange(term) {
         //el objeto state no se debe cambiar directamente.
-        this.setState({ term: e.target.value });
+        this.setState({ term: term });
+        this.props.onSearchTermChange(term);
     }
 }
 
