@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
 
-const VideoListItem = ({video}) => {
+const VideoListItem = ({video, onVideoSelect}) => {
+    //Llamar los parámetros de esta manera es lo mismo que escribir:
+    //const video = props.video;
+    //const onVideoSelect = props.onVideoSelect;
+
+    const imageUrl = video.snippet.thumbnails.default.url;
     return (
-            <li>Video</li>
-        );
+        //El callback de onVideoSelect en index.js baja dos niveles donde se le pasa la url seleccionada.
+        <li onClick={() => onVideoSelect(video)} className="list-group-item">
+            <div className="video-list media">
+                <div className="media-left">
+                    <img className="media-object" src={imageUrl}/>
+                </div>
+
+                <div className="media-body">
+                    <div className="media-heading">{video.snippet.title}</div>
+                </div>
+            </div>
+        </li>
+    );
 }
 
 export default VideoListItem;
